@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Δήμος Πατρέων_AI IT Helpdesk — Πρόταση Ψηφιακού Μετασχηματισμού_QLC</title>
+<style>
+  :root {
+    --primary: #0f2942;
+    --primary-light: #1e4268;
+    --accent-green: #8cc63f;
+    --accent-teal: #179b77;
+    --accent-blue: #009fe3;
+    --bg-page: #f4f7fa;
+    --bg-card: #ffffff;
+    --text-main: #1e293b;
+    --text-muted: #475569;
+    --border-soft: #e2e8f0;
+    --shadow-sm: 0 2px 8px rgba(15, 41, 66, 0.06);
+    --shadow-md: 0 8px 24px rgba(15, 41, 66, 0.09);
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, Roboto, Arial, sans-serif;
+    color: var(--text-main);
+    background-color: var(--bg-page);
+    line-height: 1.65;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  /* Header */
+  header.hero-header {
+    background: linear-gradient(135deg, #f8fbff 0%, #e9f2f9 55%, #e6f6f2 100%);
+    border-bottom: 3px solid var(--accent-teal);
+    padding: 28px 20px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .header-inner {
+    max-width: 1140px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    flex-wrap: wrap;
+  }
+
+  .logo-box {
+    background: rgba(255, 255, 255, 0.85);
+    padding: 12px 18px;
+    border-radius: 14px;
+    box-shadow: 0 4px 14px rgba(15, 41, 66, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .logo-box img {
+    height: 38px;
+    width: auto;
+    display: block;
+  }
+
+  .header-text {
+    flex: 1;
+    min-width: 280px;
+  }
+
+  .badge-iso {
+    text-align: center;
+    line-height: 1.45;
+display: block;
+    background: linear-gradient(90deg, var(--primary), var(--accent-teal));
+    color: #ffffff;
+    font-size: 0.92rem;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    width: fit-content;
+    padding: 10px 74px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+.badge-sub {
+    display: block;
+    font-weight: 400;
+    font-size: 0.84rem;
+    letter-spacing: 0.3px;
+    color: #e0f2fe;
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
+    margin-top: 4px;
+    padding-top: 4px;
+  }
+  .header-text h1 {
+    font-size: 1.60rem;
+    font-weight: 800;
+    color: var(--primary);
+    line-height: 1.25;
+    margin-bottom: 6px;
+    font-family: Georgia, 'Times New Roman', serif;
+  }
+
+  .header-text p {
+    font-size: 1.02rem;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  /* Sticky Floating Navigation */
+  nav.floating-nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-soft);
+    box-shadow: 0 4px 16px rgba(15, 41, 66, 0.07);
+    padding: 10px 16px;
+  }
+
+  .nav-inner {
+    max-width: 1140px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: nowwrap;
+  }
+
+  .tabs-group {
+    display: flex;
+    gap: 8px;
+    flex-wrap: nowwrap;
+    flex: 1;
+  }
+
+  .tab-btn {
+    border: 1px solid transparent;
+    background: #f1f5f9;
+    color: var(--text-main);
+    padding: 9px 11px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.22s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .tab-btn:hover {
+    background: #e2e8f0;
+    transform: translateY(-1px);
+  }
+
+  .tab-btn.active {
+    background: var(--primary);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(15, 41, 66, 0.22);
+    border-color: var(--primary);
+  }
+
+  .print-btn {
+    border: 1px solid var(--accent-teal);
+    background: #ffffff;
+    color: var(--accent-teal);
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-size: 0.92rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.22s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .print-btn:hover {
+    background: var(--accent-teal);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(23, 155, 119, 0.22);
+  }
+
+  /* Main Container & Tab Panels */
+  main.content-wrapper {
+    max-width: 1140px;
+    width: 100%;
+    margin: 28px auto 48px;
+    padding: 0 20px;
+    flex: 1;
+    scroll-margin-top: 76px;
+  }
+
+  .tab-panel {
+    display: none;
+    animation: fadeIn 0.32s ease;
+  }
+
+  .tab-panel.active {
+    display: block;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .panel-banner {
+    background: var(--bg-card);
+    border-left: 6px solid var(--accent-blue);
+    border-radius: 14px;
+    padding: 22px 26px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .panel-banner h2 {
+    font-size: 1.48rem;
+    color: var(--primary);
+    margin-bottom: 6px;
+    font-family: Georgia, 'Times New Roman', serif;
+  }
+
+  .panel-banner p {
+    color: var(--text-muted);
+    font-size: 1rem;
+  }
+
+  .section-card {
+    background: var(--bg-card);
+    border-radius: 14px;
+    padding: 24px 28px;
+    margin-bottom: 22px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-soft);
+  }
+
+  .section-card h3 {
+    font-size: 1.22rem;
+    color: var(--primary);
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #f1f5f9;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* Comparison Grid (Tab 1) */
+  .compare-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+  }
+
+  .compare-box {
+    padding: 20px;
+    border-radius: 12px;
+  }
+
+  .compare-box.old {
+    background: #fff8f6;
+    border: 1px solid #fed7aa;
+    border-top: 4px solid #ea580c;
+  }
+
+  .compare-box.new {
+    background: #f0fdf9;
+    border: 1px solid #bbf7d0;
+    border-top: 4px solid var(--accent-teal);
+  }
+
+  .compare-box h4 {
+    font-size: 1.08rem;
+    margin-bottom: 10px;
+    color: var(--primary);
+  }
+
+  .compare-box ul {
+    margin-top: 10px;
+    padding-left: 20px;
+  }
+
+  .compare-box li {
+    margin-bottom: 8px;
+  }
+
+  /* Steps Grid (Tab 1) */
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 18px;
+  }
+
+  .step-card {
+    background: #f8fafc;
+    border: 1px solid var(--border-soft);
+    border-radius: 12px;
+    padding: 18px;
+    position: relative;
+    transition: transform 0.2s ease;
+  }
+
+  .step-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .step-num {
+    display: inline-block;
+    background: var(--primary);
+    color: #fff;
+    font-size: 0.78rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+  }
+
+  .step-card h4 {
+    font-size: 1.04rem;
+    color: var(--primary);
+    margin-bottom: 8px;
+  }
+
+  /* Benefits & Feature Lists */
+  .feature-list {
+    display: grid;
+    gap: 14px;
+  }
+
+  .feature-item {
+    background: #f8fafc;
+    border-left: 4px solid var(--accent-green);
+    padding: 15px 18px;
+    border-radius: 0 10px 10px 0;
+  }
+
+  .feature-item.blue {
+    border-left-color: var(--accent-blue);
+  }
+
+  .feature-item.teal {
+    border-left-color: var(--accent-teal);
+  }
+
+  .feature-item > strong:first-child {
+    color: var(--primary);
+    display: block;
+    margin-bottom: 4px;
+    font-size: 1.03rem;
+  }
+
+  .numbered-steps {
+    list-style: none;
+    counter-reset: step-counter;
+    margin-top: 12px;
+  }
+
+  .numbered-steps li {
+    counter-increment: step-counter;
+    position: relative;
+    padding-left: 36px;
+    margin-bottom: 12px;
+  }
+
+  .numbered-steps li::before {
+    content: counter(step-counter);
+    position: absolute;
+    left: 0;
+    top: 1px;
+    width: 24px;
+    height: 24px;
+    background: var(--accent-teal);
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 0.85rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Architecture Flow Diagram (Tab 3) */
+  .flow-box {
+    background: #f8fafc;
+    border: 1px solid var(--border-soft);
+    border-radius: 12px;
+    padding: 18px;
+    margin-bottom: 16px;
+  }
+
+  .flow-title {
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 12px;
+    font-size: 1.04rem;
+  }
+
+  .flow-chain {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .flow-node {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--primary);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+
+  .flow-arrow {
+    color: var(--accent-teal);
+    font-weight: 800;
+    font-size: 1.1rem;
+  }
+
+  /* Accordion FAQs (Tab 4) */
+  .faq-controls {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .faq-ctrl-btn {
+    background: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    color: var(--primary);
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .faq-ctrl-btn:hover {
+    background: #e2e8f0;
+  }
+
+  .faq-item {
+    border: 1px solid var(--border-soft);
+    border-radius: 12px;
+    margin-bottom: 14px;
+    background: #ffffff;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(15, 41, 66, 0.04);
+  }
+
+  .faq-question {
+    width: 100%;
+    text-align: left;
+    background: #f8fafc;
+    border: none;
+    padding: 18px 20px;
+    font-size: 1.03rem;
+    font-weight: 700;
+    color: var(--primary);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 14px;
+    transition: background 0.2s ease;
+  }
+
+  .faq-question:hover {
+    background: #eef4fa;
+  }
+
+  .faq-item.open .faq-question {
+    background: var(--primary);
+    color: #ffffff;
+  }
+
+  .faq-icon {
+    font-size: 1.3rem;
+    font-weight: 700;
+    transition: transform 0.25s ease;
+    flex-shrink: 0;
+  }
+
+  .faq-item.open .faq-icon {
+    transform: rotate(45deg);
+  }
+
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease, padding 0.35s ease;
+    padding: 0 20px;
+    background: #ffffff;
+    color: var(--text-main);
+  }
+
+  .faq-item.open .faq-answer {
+    max-height: 600px;
+    padding: 18px 20px;
+    border-top: 1px solid var(--border-soft);
+  }
+
+  code.inline-code {
+    background: #eef2f6;
+    color: #0f2942;
+    padding: 2px 6px;
+    border-radius: 5px;
+    font-family: Consolas, Monaco, monospace;
+    font-size: 0.9em;
+    font-weight: 600;
+  }
+
+  /* Footer */
+  footer.site-footer {
+    background: var(--primary);
+    color: #e2e8f0;
+    padding: 18px 20px;
+    font-size: 0.9rem;
+    margin-top: auto;
+  }
+
+  .footer-inner {
+    max-width: 1140px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  /* Print Styles: Print ONLY the active tab cleanly from the top without blank space */
+  @media print {
+    nav.floating-nav,
+    .nav-inner,
+    .tabs-group,
+    .print-btn {
+      display: none !important;
+    }
+    @page {
+      margin: 12mm;
+    }
+html { font-size: 14px; }
+
+    body {
+      background: #ffffff !important;
+      color: #000000 !important;
+    }
+
+    header.hero-header {
+      background: #ffffff !important;
+      border-bottom: 2px solid #0f2942 !important;
+      box-shadow: none !important;
+      padding: 10px 0 14px !important;
+      margin-bottom: 12px !important;
+    }
+
+    .logo-box {
+      box-shadow: none !important;
+      border: none !important;
+      padding: 0 !important;
+    }
+
+    nav.floating-nav,
+    .print-btn,
+    .faq-controls,
+    { display: none !important; }
+    .header-inner, .logo-box, .header-text {
+      display: block !important;
+      width: 100% !important;
+      text-align: left !important;
+    }
+    .logo-box img {
+      height: 32px !important;
+      margin-bottom: 6px !important;
+    }
+    footer.site-footer {
+      display: block !important;
+      background: #ffffff !important;
+      color: #334155 !important;
+      border-top: 1px solid #cbd5e1 !important;
+      padding: 10px 0 0 0 !important;
+      margin-top: 16px !important;
+    }
+
+
+    main.content-wrapper {
+      margin: 0 !important;
+      padding: 0 !important;
+      max-width: 100% !important;
+    }
+
+    .tab-panel {
+      display: none !important;
+    }
+
+    .tab-panel.active {
+      display: block !important;
+      animation: none !important;
+    }
+
+    .panel-banner,
+    .step-card,
+    .feature-item,
+    .flow-box,
+    .faq-item {
+      box-shadow: none !important;
+      break-inside: avoid;
+      page-break-inside: avoid;
+      margin-bottom: 14px !important;
+    }
+
+    /* Expand all FAQs when printing Tab 4 */
+    .faq-item .faq-answer {
+      max-height: none !important;
+      padding: 14px 18px !important;
+      display: block !important;
+    }
+
+    .faq-item .faq-question {
+      background: #f1f5f9 !important;
+      color: #0f2942 !important;
+    }
+  }
+
+</style>
+</head>
+<body oncontextmenu="return false;" oncopy="return false;" oncut="return false;" onpaste="return false;" onselectstart="return false;" ondragstart="return false;">
+
+  <header class="hero-header">
+    <div class="header-inner">
+      <div class="logo-box">
+        <img src="data:image/png;base64,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" alt="Logo Οργανισμού">
+      </div>
+      <div class="header-text">
+        <span class="badge-iso">Δήμος Πατρέων - Διεύθυνση Προγραμματισμού, Οργάνωσης και Πληροφορικής<br><span class="badge-sub">Πρόταση Ψηφιακού Μετασχηματισμού του Τμήματος Πληροφορικής και Επικοινωνιών</span></span>
+
+        <h1>Αυτοματοποιημένο Σύστημα Διαχείρισης Αιτημάτων Τεχνικής Υποστήριξης (AI IT Helpdesk)</h1>
+        <p>Ταχεία φωνητική αναφορά τεχνικών προβλημάτων, αυτοματοποιημένη δρομολόγηση και πλήρης τεκμηρίωση λειτουργίας.</p>
+      </div>
+    </div>
+  </header>
+
+  <nav class="floating-nav" aria-label="Κύρια Πλοήγηση Καρτελών">
+    <div class="nav-inner">
+      <div class="tabs-group" role="tablist">
+        <button class="tab-btn active" role="tab" aria-selected="true" data-tab="tab1">🏠 1. Όραμα &amp; Λειτουργία</button>
+        <button class="tab-btn" role="tab" aria-selected="false" data-tab="tab2">🏢 2. Επέκταση &amp; Χωρητικότητα</button>
+        <button class="tab-btn" role="tab" aria-selected="false" data-tab="tab3">🛡️ 3. Τεχνολογία &amp; Ασφάλεια</button>
+        <button class="tab-btn" role="tab" aria-selected="false" data-tab="tab4">❓ 4. FAQs (Τεχνικές Ερωτήσεις)</button>
+      </div>
+      <button class="print-btn" onclick="window.print()" title="Εκτύπωση της ενεργής καρτέλας">🖨️ Εκτύπωση Ενότητας</button>
+    </div>
+  </nav>
+
+  <main class="content-wrapper" id="main-content">
+
+    <!-- ΚΑΡΤΕΛΑ 1 -->
+    <section id="tab1" class="tab-panel active" role="tabpanel">
+      <div class="panel-banner">
+        <h2>Ενότητα 1: Το Όραμα &amp; Η Λειτουργία</h2>
+        <p>Από το τεχνικό πρόβλημα στην ανάθεση σε 5 δευτερόλεπτα — με πλήρη καταγραφή, ταχύτητα και ετοιμότητα για ISO 9001:2015.</p>
+      </div>
+
+      <div class="section-card">
+        <h3>1. Η Μέχρι Σήμερα Πραγματικότητα vs Η Νέα Λύση</h3>
+        <div class="compare-grid">
+          <div class="compare-box old">
+            <h4>📌 Η Μέχρι Σήμερα Πραγματικότητα</h4>
+            <p>Ενώ τα πιο σύνθετα αιτήματα (όπως αναβαθμίσεις λογισμικού ή νέες εγκαταστάσεις) δρομολογούνται μέσω ηλεκτρονικού ταχυδρομείου (email), <strong>ένας πολύ σημαντικός όγκος καθημερινών αιτημάτων τεχνικής υποστήριξης</strong> (για θέματα software και hardware) εξακολουθεί να υποβάλλεται άτυπα (τηλεφωνήματα, προφορικές αναφορές, σκόρπια μηνύματα). Αυτό δημιουργεί τρία κρίσιμα ζητήματα:</p>
+            <ul>
+              <li><strong>Κίνδυνος απώλειας ή καθυστέρησης</strong> αιτημάτων σε ώρες αιχμής.</li>
+              <li><strong>Ελλιπής εικόνα</strong> του πραγματικού όγκου εργασίας και των αναγκών που εξυπηρετεί καθημερινά το Τμήμα Πληροφορικής και Επικοινωνιών.</li>
+              <li><strong>Αδυναμία συστηματικής τεκμηρίωσης</strong>, η οποία αποτελεί βασική απαίτηση για την επικείμενη πιστοποίηση κατά <strong>ISO 9001:2015</strong> (που βρίσκεται ήδη στον σχεδιασμό του Οργανισμού για τον επόμενο χρόνο).</li>
+            </ul>
+          </div>
+          <div class="compare-box new">
+            <h4>🚀 Η Νέα Λύση (AI IT Helpdesk)</h4>
+            <p>Ένα σύγχρονο <strong>«ψηφιακό γκισέ» 24/7</strong> στο κινητό ή στον υπολογιστή κάθε υπαλλήλου.</p>
+            <p style="margin-top: 10px;">Ο χρήστης περιγράφει φωνητικά το τεχνικό πρόβλημα σε <strong>5 δευτερόλεπτα</strong> και η Τεχνητή Νοημοσύνη αναλαμβάνει αυτόματα:</p>
+            <ul>
+              <li>Την ακριβή μετατροπή της φωνής σε κείμενο και τη σύνοψη.</li>
+              <li>Την καταγραφή και κατηγοριοποίηση με μοναδικό αριθμό παρακολούθησης.</li>
+              <li>Την άμεση κινητοποίηση των τεχνικών.</li>
+              <li>Την τήρηση πλήρους ιστορικού για τη συνολική εικόνα λειτουργίας του Τμήματος.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <h3>2. Πώς Λειτουργεί στην Πράξη (4 Απλά Βήματα)</h3>
+        <div class="steps-grid">
+          <div class="step-card">
+            <span class="step-num">ΒΗΜΑ 1</span>
+            <h4>🎙️ Φωνητική Αναφορά (5 δευτερόλεπτα)</h4>
+            <p>Ο υπάλληλος ανοίγει το εταιρικό Bot στο Telegram και στέλνει ένα απλό φωνητικό μήνυμα περιγράφοντας το τεχνικό πρόβλημα (π.χ. <em>«Έχει κολλήσει ο δικτυακός εκτυπωτής στο λογιστήριο»</em> ή <em>«Δεν ανοίγει η εφαρμογή του πρωτοκόλλου στον υπολογιστή μου»</em>), χωρίς να χρειάζεται να συμπληρώνει πολύπλοκες φόρμες ή να στέλνει γραπτά μηνύματα / emails.</p>
+          </div>
+          <div class="step-card">
+            <span class="step-num">ΒΗΜΑ 2</span>
+            <h4>🤖 Αυτόματη Επεξεργασία από AI &amp; Καταγραφή</h4>
+            <p>Το σύστημα μετατρέπει ακαριαία τη φωνή σε κείμενο, δημιουργεί μια σαφή περίληψη του τεχνικού προβλήματος και καταγράφει αυτόματα όλα τα απαραίτητα στοιχεία (μοναδικό κωδικό π.χ. <code class="inline-code">ΑΡ-47</code>, ημερομηνία/ώρα, αποστολέα, αρχικό κείμενο και περίληψη) σε κεντρικό φύλλο <strong>Google Sheets</strong>, στέλνοντας ταυτόχρονα αποδεικτικό καταχώρισης στον υπάλληλο.</p>
+          </div>
+          <div class="step-card">
+            <span class="step-num">ΒΗΜΑ 3</span>
+            <h4>🙋‍♂️ Άμεση Ειδοποίηση &amp; Ανάληψη Αιτήματος</h4>
+            <p>Η ομάδα του Τμήματος Πληροφορικής και Επικοινωνιών λαμβάνει ειδοποίηση στον λογαριασμό της στο Telegram με τη σύνοψη του προβλήματος και το διαδραστικό κουμπί <strong>«🙋‍♂️ Το αναλαμβάνω»</strong>. Με ένα πάτημα από το κινητό —ή εναλλακτικά απευθείας μέσα από το φύλλο του Google Sheets— το αίτημα «κλειδώνει» στον συγκεκριμένο τεχνικό (αποφεύγοντας διπλές παρεμβάσεις), η κατάσταση αλλάζει αυτόματα σε <em>«Σε εξέλιξη»</em> και καταγράφεται η ακριβής χρονοσήμανση.</p>
+          </div>
+          <div class="step-card">
+            <span class="step-num">ΒΗΜΑ 4</span>
+            <h4>📊 Συγκεντρωτική Εικόνα &amp; Τεκμηρίωση (Dashboard)</h4>
+            <p>Όλα τα αιτήματα αρχειοθετούνται αυτόματα σε έναν κεντρικό Πίνακα Ελέγχου, προσφέροντας ανά πάσα στιγμή έτοιμα στατιστικά στοιχεία (πλήθος αιτημάτων ανά μονάδα/κτίριο, είδος βλαβών, χρόνοι ανταπόκρισης και επίλυσης) για την υποστήριξη της διοικητικής πληροφόρησης και των ελέγχων ποιότητας.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <h3>3. Τι Κερδίζει ο Οργανισμός (Βασικά Οφέλη)</h3>
+        <div class="feature-list">
+          <div class="feature-item">
+            <strong>📋 Ετοιμότητα για ISO 9001:2015 &amp; Αποτύπωση Έργου</strong>
+            Δημιουργείται αυτόματα ένα πλήρες, αδιάβλητο αρχείο τεκμηρίωσης (ποιος ζήτησε τι, πότε αναφέρθηκε, ποιος τεχνικός το ανέλαβε, πότε επιλύθηκε). Έτσι, αναδεικνύεται με μετρήσιμα στοιχεία ο πραγματικός όγκος εργασίας του Τμήματος και καλύπτονται οι απαιτήσεις ιχνηλασιμότητας του ISO χωρίς επιπλέον γραφειοκρατία.
+          </div>
+          <div class="feature-item blue">
+            <strong>⚡ Ταχύτητα &amp; Απλότητα για το Προσωπικό</strong>
+            Μηδενική καμπύλη εκμάθησης. Όποιος υπάλληλος μπορεί να στείλει ένα φωνητικό μήνυμα, μπορεί να υποβάλει αίτημα υποστήριξης ακόμα κι όταν το εσωτερικό νούμερο VoIP, ο υπολογιστής ή το δίκτυό του έχει πρόβλημα.
+          </div>
+          <div class="feature-item teal">
+            <strong>💰 Αξιοποίηση Υφιστάμενων Υποδομών &amp; Μηδενικό Κόστος (100% Δωρεάν)</strong>
+            Αντί για την προμήθεια ακριβών εμπορικών συστημάτων Ticketing (τα οποία απαιτούν χρονοβόρους διαγωνισμούς, ετήσιες συνδρομές ανά χρήστη / τεχνικό και πολύπλοκη παραμετροποίηση), η λύση βασίζεται εξ ολοκλήρου σε δωρεάν υπηρεσίες cloud της Google (Google Sheets &amp; Google Apps Script) σε συνδυασμό με σύγχρονα εργαλεία αυτοματισμού και AI στα δωρεάν πλάνα χρήσης (Free Tiers) — τα οποία υπερκαλύπτουν τον ημερήσιο όγκο αιτημάτων του Οργανισμού. Έτσι, <strong>δεν απαιτείται καμία αγορά αδειών ή νέα συνδρομή (κόστος 0 €)</strong>, ενώ τα δεδομένα τηρούνται σε κεντρικό αρχείο υπό τον πλήρη έλεγχο του Τμήματος.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ΚΑΡΤΕΛΑ 2 -->
+    <section id="tab2" class="tab-panel" role="tabpanel">
+      <div class="panel-banner" style="border-left-color: var(--accent-teal);">
+        <h2>Ενότητα 2: Επέκταση σε Όλο τον Οργανισμό &amp; Χωρητικότητα</h2>
+        <p>Πώς το σύστημα προσαρμόζεται δυναμικά σε πολλαπλά κτίρια, οργανώνει τους τεχνικούς και καλύπτει άνετα και τους ~600 εργαζομένους του Οργανισμού με μηδενικό κόστος.</p>
+      </div>
+
+      <div class="section-card">
+        <h3>1. Αρχιτεκτονική Πολλαπλών Κτιρίων (Multi-Bot / Multi-Unit)</h3>
+        <p style="margin-bottom: 14px;">Το σύστημα είναι σχεδιασμένο ώστε να επεκτείνεται εύκολα από μία πιλοτική εγκατάσταση (π.χ. <em>Αρσάκειο</em>) σε όλες τις οργανικές μονάδες και τα κτίρια του Οργανισμού:</p>
+        <div class="feature-list">
+          <div class="feature-item teal">
+            <strong>🏢 Εξειδικευμένο Κανάλι ανά Κτίριο</strong>
+            Κάθε κτίριο ή συγκρότημα υπηρεσιών αποκτά το δικό του αποκλειστικό εταιρικό Bot (π.χ. <em>Helpdesk Αρσακείου</em>, <em>Helpdesk Αγοράς Αργύρη</em>, κ.λπ.).
+          </div>
+          <div class="feature-item blue">
+            <strong>🔀 Αυτόματη Δρομολόγηση &amp; Κωδικοποίηση</strong>
+            Όλα τα αιτήματα καταλήγουν στο ίδιο κεντρικό Google Sheets, αλλά κατευθύνονται αυτόματα στη σωστή καρτέλα κτιρίου και λαμβάνουν το αντίστοιχο πρόθεμα πρωτοκόλλου (π.χ. <code class="inline-code">ΑΡ-47</code>, <code class="inline-code">ΑΑ-12</code>).
+          </div>
+          <div class="feature-item">
+            <strong>📊 Ενιαίος Συγκεντρωτικός Πίνακας (Master Dashboard)</strong>
+            Όλες οι καρτέλες των κτιρίων τροφοδοτούν αυτόματα έναν κεντρικό Πίνακα Ελέγχου για συνολική εποπτεία σε επίπεδο Διεύθυνσης.
+          </div>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <h3>2. Οργάνωση Τεχνικών &amp; Διαδικασία Ένταξης (~600 Χρηστών)</h3>
+        <div class="feature-list">
+          <div class="feature-item blue">
+            <strong>🎯 Στοχευμένη Κατανομή Τεχνικών</strong>
+            Οι τεχνικοί οργανώνονται σε ξεχωριστές ομάδες ειδοποιήσεων είτε <strong>ανά κτίριο/περιοχή ευθύνης</strong> είτε <strong>ανά ειδικότητα</strong> (Software, Hardware/Δίκτυα, κ.λπ.), ώστε κάθε αίτημα να φτάνει στους κατάλληλους αποδέκτες.
+          </div>
+          <div class="feature-item teal">
+            <strong>👥 Απλή &amp; Μαζική Ένταξη Προσωπικού (3 Βήματα)</strong>
+            <ol class="numbered-steps">
+              <li>Ο υπάλληλος εγκαθιστά τη δωρεάν εφαρμογή <strong>Telegram</strong> (στο κινητό ή στον υπολογιστή του).</li>
+              <li>Συνδέεται στο Bot της μονάδας του μέσω <strong>κλειστού συνδέσμου πρόσκλησης</strong> και δηλώνει εφάπαξ το ονοματεπώνυμό του.</li>
+              <li>Το σύστημα καταγράφει το μοναδικό, αμετάβλητο <code class="inline-code">Telegram User ID</code> του στη λίστα εγκεκριμένων χρηστών (Whitelist). Από εκείνη τη στιγμή, κάθε φωνητικό μήνυμα ταυτοποιείται αυτόματα χωρίς να χρειάζονται κωδικοί, τηλέφωνα ή επιπλέον στοιχεία.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <h3>3. Κλιμάκωση &amp; Χωρητικότητα για 600+ Χρήστες (Με 0 € Κόστος)</h3>
+        <div class="feature-list">
+          <div class="feature-item">
+            <strong>📈 Κατανεμημένη Δυναμικότητα (Scaling)</strong>
+            Χάρη στην αρχιτεκτονική ενός ξεχωριστού Bot ανά κτίριο/συγκρότημα (και τη βελτιστοποιημένη ροή που καταναλώνει ελάχιστους πόρους ανά αίτημα), η δωρεάν μηνιαία χωρητικότητα πολλαπλασιάζεται ανάλογα με τον αριθμό των κτιρίων που θα ενταχθούν (π.χ. <strong>10 ή περισσότερες μονάδες</strong>).
+          </div>
+          <div class="feature-item teal">
+            <strong>✅ Υπερκάλυψη Αναγκών</strong>
+            Με αυτή την κατανομή ανά κτίριο, το σύστημα μπορεί να εξυπηρετεί άνετα <strong>χιλιάδες τεχνικά αιτήματα τον μήνα</strong> (πάνω από 300 αιτήματα ανά κτίριο/μήνα), καλύπτοντας με τεράστιο περιθώριο ασφαλείας το σύνολο των <strong>~600 εργαζομένων</strong> του Οργανισμού, χωρίς καμία εμπορική συνδρομή ή κόστος αδειών (<strong>0 €</strong>).
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ΚΑΡΤΕΛΑ 3 -->
+    <section id="tab3" class="tab-panel" role="tabpanel">
+      <div class="panel-banner" style="border-left-color: var(--accent-green);">
+        <h2>Ενότητα 3: Τεχνολογία, Ασφάλεια &amp; GDPR</h2>
+        <p>Πώς λειτουργεί το «ψηφιακό γκισέ», γιατί επιλέχθηκε το Telegram και πώς θωρακίζονται τα δεδομένα του Οργανισμού.</p>
+      </div>
+
+      <div class="section-card">
+        <h3>1. Τι Είναι το «Εταιρικό Bot» &amp; Γιατί Επιλέχθηκε το Telegram;</h3>
+        <div class="feature-list">
+          <div class="feature-item blue">
+            <strong>🤖 Απλή Εξήγηση (Τι είναι το Bot)</strong>
+            Ένα Bot (από τη λέξη <em>Robot</em>) είναι ένας αυτοματοποιημένος ψηφιακός λογαριασμός εξυπηρέτησης 24/7 — λειτουργεί ακριβώς όπως ένα «ψηφιακό γκισέ» ή ένας αυτόματος τηλεφωνητής, αλλά μέσω μηνυμάτων. Για τον υπάλληλο μοιάζει με μια απλή επαφή στο κινητό ή στον υπολογιστή του, στην οποία πατάει το μικρόφωνο και στέλνει ένα φωνητικό μήνυμα.
+          </div>
+          <div class="feature-item teal">
+            <strong>💬 Γιατί Telegram (και όχι Viber ή WhatsApp)</strong>
+            <ul style="margin-top: 8px; padding-left: 20px;">
+              <li style="margin-bottom: 6px;"><strong>Επίσημο &amp; Δωρεάν Επαγγελματικό API:</strong> Το Telegram διαθέτει επίσημη, ανοιχτή υποδομή (<em>Official Bot API</em>) σχεδιασμένη ειδικά για Οργανισμούς και αυτοματισμούς, με <strong>μηδενικές χρεώσεις ανά μήνυμα</strong> (σε αντίθεση με το WhatsApp Business API και το Viber που επιβάλλουν εμπορικές χρεώσεις ανά συνομιλία/μήνυμα).</li>
+              <li><strong>Λειτουργία σε Κάθε Συσκευή (Multi-Platform):</strong> Λειτουργεί ταυτόχρονα σε Android, iOS, Windows, macOS και μέσω Web Browser, επιτρέποντας στους υπαλλήλους να στέλνουν αιτήματα ακόμα κι όταν ο υπολογιστής ή το εσωτερικό δίκτυο του γραφείου τους έχει "πέσει".</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <h3>2. Οι 5 Πυλώνες Κυβερνοασφάλειας &amp; Συμμόρφωσης GDPR</h3>
+        <p style="margin-bottom: 14px;">Το σύστημα έχει σχεδιαστεί με γνώμονα την ασφάλεια πληροφοριών και την ελαχιστοποίηση δεδομένων (Data Minimization):</p>
+        <div class="feature-list">
+          <div class="feature-item">
+            <strong>🔒 1. Κρυπτογράφηση Επικοινωνίας (Encryption in Transit)</strong>
+            Όλα τα μηνύματα, τα φωνητικά αρχεία και οι κλήσεις μεταξύ συσκευών, Telegram, Make.com, Groq και Google μεταφέρονται αποκλειστικά μέσω κρυπτογραφημένων πρωτοκόλλων <strong>HTTPS / TLS 1.3</strong> (ασφάλεια τραπεζικού επιπέδου), αποτρέποντας οποιαδήποτε υποκλοπή κατά τη μεταφορά.
+          </div>
+          <div class="feature-item blue">
+            <strong>🛡️ 2. Αυστηρός Έλεγχος Πρόσβασης (Access Control / Whitelisting)</strong>
+            Τα εταιρικά Bots δεν είναι δημόσια προσβάσιμα ούτε εμφανίζονται σε καταλόγους αναζήτησης. Η πρόσβαση επιτρέπεται αποκλειστικά σε εγκεκριμένους υπαλλήλους (βάσει λίστας επιτρεπόμενων <code class="inline-code">Telegram User IDs</code>). Οποιοσδήποτε εξωτερικός χρήστης προσπαθήσει να στείλει μήνυμα, απορρίπτεται αυτόματα.
+          </div>
+          <div class="feature-item teal">
+            <strong>🔑 3. Μηδενική Έκθεση Κωδικών (Token-Based Authentication)</strong>
+            Η διασύνδεση των συστημάτων γίνεται μέσω κρυπτογραφημένων κλειδιών ασφαλείας (<em>API Tokens</em>), χωρίς να αποθηκεύονται ή να ανταλλάσσονται κωδικοί πρόσβασης (passwords) υπαλλήλων. Σε περίπτωση ανάγκης, κάθε κλειδί ανακαλείται και αντικαθίσταται σε 5 δευτερόλεπτα.
+          </div>
+          <div class="feature-item">
+            <strong>🎙️ 4. Μηδενική Αποθήκευση Ήχου σε Τρίτους (Data Minimization)</strong>
+            Το αρχείο ήχου επεξεργάζεται στη μνήμη μόνο για 1–2 δευτερόλεπτα ώστε να μετατραπεί σε κείμενο και <strong>δεν αποθηκεύεται μόνιμα</strong> σε εξωτερικούς servers. Τα μόνα δεδομένα που τηρούνται είναι τα κείμενα των αιτημάτων στο κεντρικό αρχείο Google Sheets, υπό τον πλήρη έλεγχο του Τμήματος.
+          </div>
+          <div class="feature-item blue">
+            <strong>👁️ 5. Απομόνωση Δεδομένων &amp; Ιχνηλασιμότητα (Audit Trail)</strong>
+            Οι υπάλληλοι που υποβάλλουν αιτήματα δεν έχουν πρόσβαση ούτε βλέπουν τη βάση δεδομένων (Google Sheets) ούτε τα αιτήματα άλλων συναδέλφων — βλέπουν αποκλειστικά τη δική τους συνομιλία με το Bot. Παράλληλα, κάθε ενέργεια καταγράφεται με ακριβή χρονοσήμανση (<em>timestamp</em>) και ταυτότητα χρήστη.
+          </div>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <h3>3. Συνοπτικό Διάγραμμα Αρχιτεκτονικής</h3>
+        <div class="flow-box">
+          <div class="flow-title">📤 Ροή Α — Υποβολή Αιτήματος</div>
+          <div class="flow-chain">
+            <span class="flow-node">👤 Υπάλληλος (Telegram Bot)</span>
+            <span class="flow-arrow">➔</span>
+            <span class="flow-node">⚙️ Make.com (Webhook Trigger)</span>
+            <span class="flow-arrow">➔</span>
+            <span class="flow-node">🧠 Groq AI (Whisper STT + Σύνοψη)</span>
+            <span class="flow-arrow">➔</span>
+            <span class="flow-node">📊 Google Sheets (Καταγραφή &amp; Αυτόματος Κωδικός)</span>
+            <span class="flow-arrow">➔</span>
+            <span class="flow-node">🔔 Google Apps Script (onChange Ειδοποίηση με κουμπί ανάληψης στην Ομάδα Τεχνικών)</span>
+          </div>
+        </div>
+        <div class="flow-box" style="margin-bottom: 0;">
+          <div class="flow-title">🙋‍♂️ Ροή Β — Ανάληψη &amp; Ενημέρωση</div>
+          <div class="flow-chain">
+            <span class="flow-node">🛠️ Τεχνικός (Πάτημα «🙋‍♂️ Το αναλαμβάνω»)</span>
+            <span class="flow-arrow">➔</span>
+            <span class="flow-node">⚙️ Make.com (Callback Query)</span>
+            <span class="flow-arrow">➔</span>
+            <span class="flow-node">📊 Google Sheets (Ενημέρωση Κατάστασης, Ώρας &amp; Τεχνικού)</span>
+            <span class="flow-arrow">➔</span>
+            <span class="flow-node">🔒 Telegram (Κλείδωμα μηνύματος στην ομάδα ώστε να αποφευχθεί διπλή ανάληψη)</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ΚΑΡΤΕΛΑ 4: FAQs -->
+    <section id="tab4" class="tab-panel" role="tabpanel">
+      <div class="panel-banner" style="border-left-color: var(--primary);">
+        <h2>Ενότητα 4: FAQs — Απαντήσεις σε Κρίσιμες Τεχνικές Ερωτήσεις (IT Q&amp;A)</h2>
+        <p>Τεχνική τεκμηρίωση για θέματα αξιοπιστίας, ασφάλειας, προστασίας δεδομένων και συντήρησης του συστήματος.</p>
+      </div>
+
+      <div class="section-card">
+        <div class="faq-controls">
+          <button class="faq-ctrl-btn" onclick="toggleAllFaqs(true)">➕ Άνοιγμα Όλων</button>
+          <button class="faq-ctrl-btn" onclick="toggleAllFaqs(false)">➖ Κλείσιμο Όλων</button>
+        </div>
+
+        <div class="faq-item open">
+          <button class="faq-question" aria-expanded="true">
+            <span>❓ Ερώτηση 1: «Πώς διαχειρίζεται το σύστημα τον συγχρονισμό σε περίπτωση ταυτόχρονης ανάληψης ενός αιτήματος από περισσότερους τεχνικούς (Race Condition);»</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p><strong>Απάντηση:</strong> Το σύστημα αποτρέπει τη διπλή ανάθεση σε δύο επίπεδα: Μόλις πατηθεί το κουμπί από τον πρώτο τεχνικό, το Make.com εκτελεί ακαριαία εντολή τροποποίησης του μηνύματος (<code class="inline-code">editMessageText</code>) στην ομάδα, <strong>αφαιρώντας το διαδραστικό κουμπί</strong> για όλα τα υπόλοιπα μέλη της ομάδας και αντικαθιστώντας το με το όνομα του τεχνικού που το ανέλαβε. Ακόμα κι αν υπάρξει ταυτόχρονο κλικ στο ίδιο δευτερόλεπτο, στο Google Sheet καταγράφεται τελικά ο τελευταίος ενημερωμένος κάτοχος, ενώ το ιστορικό εκτελέσεων (Execution Log) του Make.com δείχνει με ακρίβεια χιλιοστού του δευτερολέπτου ποιος τεχνικός ανταποκρίθηκε πρώτος.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span>❓ Ερώτηση 2: «Πώς διασφαλίζεται η ακεραιότητα των δεδομένων στο Google Sheet από ακούσιες αλλαγές ή διαγραφές κατά την καθημερινή χρήση;»</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p><strong>Απάντηση:</strong> Η βάση είναι προστατευμένη (<strong>Protected Ranges</strong>): Οι κρίσιμες στήλες που παράγουν τους αυτόματους κωδικούς (<code class="inline-code">ARRAYFORMULA</code> στη Στήλη Α) και τα timestamps είναι <strong>κλειδωμένες (Read-Only)</strong> για τους χειριστές. Οι τεχνικοί έχουν δικαίωμα επεξεργασίας αποκλειστικά στα πεδία «Κατάσταση» (μέσω κλειστής αναπτυσσόμενης λίστας / Dropdown) και «Σχόλια». Επιπλέον, το Google Sheets διατηρεί αυτόματο ιστορικό εκδόσεων (Version History) ανά λεπτό, επιτρέποντας επαναφορά σε 10 δευτερόλεπτα.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span>❓ Ερώτηση 3: «Γιατί επιλέχθηκε το Make.com ως κεντρικός ενορχηστρωτής (Orchestrator) αντί της απευθείας δημοσίευσης Web App / Webhook μέσω Google Apps Script;»</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p><strong>Απάντηση:</strong> Επιλέχθηκε συνειδητά για λόγους <strong>αρχιτεκτονικής σταθερότητας και ασφάλειας</strong>: Ένα Web App στο Google Apps Script απαιτεί δημοσίευση (Deploy) ενός δημόσιου URL στο διαδίκτυο, δημιουργεί κίνδυνο ατέρμονων βρόχων (infinite loops) με το Telegram API σε περίπτωση καθυστέρησης απόκρισης, και απαιτεί επαναδημοσίευση URL σε κάθε αλλαγή κώδικα. Με την τρέχουσα αρχιτεκτονική (Make.com ως κεντρικός ενορχηστρωτής), το Google Sheet <strong>δεν εκτίθεται καθόλου στο διαδίκτυο</strong> (μηδενικά ανοιχτά endpoints), ενώ ο κώδικας του Apps Script περιορίζεται σε μόλις ~45 γραμμές εσωτερικής αυτοματοποίησης (<code class="inline-code">onEdit</code> / <code class="inline-code">onChange</code>).</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span>❓ Ερώτηση 4: «Πώς διασφαλίζεται ότι δεν θα χαθεί κάποιο αίτημα σε περίπτωση προσωρινής διακοπής δικτύου ή μη διαθεσιμότητας εξωτερικής υπηρεσίας (π.χ. Groq AI);»</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p><strong>Απάντηση:</strong> Το Make.com διαθέτει ενσωματωμένο μηχανισμό <strong>Incomplete Executions &amp; Auto-Retry</strong>: Αν κάποιο εξωτερικό API (π.χ. η μετατροπή φωνής) δεν απαντήσει λόγω προσωρινής μη διαθεσιμότητας, το αίτημα αποθηκεύεται στην ουρά (Queue) μαζί με το αρχείο ήχου και επανεκτελείται αυτόματα μόλις αποκατασταθεί η σύνδεση, χωρίς να χαθεί κανένα αίτημα.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span>❓ Ερώτηση 5: «Ποιες είναι οι απαιτήσεις συντήρησης του συστήματος και πώς διασφαλίζεται η απρόσκοπτη υποστήριξή του από το προσωπικό του Τμήματος;»</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p><strong>Απάντηση:</strong> Το σύστημα είναι <strong>No-Code / Low-Code</strong>: Όλη η ροή στο Make.com είναι οπτική (διαγράμματα με κουτάκια και βέλη, χωρίς πολύπλοκο κώδικα), τα δεδομένα βρίσκονται σε ένα απλό αρχείο Google Sheets οικείο σε κάθε στέλεχος της Διεύθυνσης, και ο κώδικας Apps Script είναι μόλις 45 σχολιασμένες γραμμές. Οποιοσδήποτε τεχνικός IT μπορεί να κατανοήσει και να συντηρήσει το σύστημα μέσα σε 15 λεπτά με την παρεχόμενη τεχνική τεκμηρίωση.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span>Νοέμβριος 2026 • Έκδοση 1.0 (Πιλοτική Εφαρμογή σε Λειτουργία)</span>
+    </div>
+  </footer>
+
+<script>
+  // Tab Switching & Smooth Scroll to Top of Selected Tab
+  const tabButtons = document.querySelectorAll('.tab-btn');
+  const tabPanels = document.querySelectorAll('.tab-panel');
+  const mainContent = document.getElementById('main-content');
+
+  tabButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetId = btn.getAttribute('data-tab');
+
+      tabButtons.forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      tabPanels.forEach(p => p.classList.remove('active'));
+
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+      const targetPanel = document.getElementById(targetId);
+      if (targetPanel) {
+        targetPanel.classList.add('active');
+      }
+
+      // Smooth scroll to the beginning of the selected tab content
+      mainContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  // FAQ Accordion Logic
+  const faqQuestions = document.querySelectorAll('.faq-question');
+  faqQuestions.forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.parentElement;
+      const isOpen = item.classList.contains('open');
+      item.classList.toggle('open');
+      q.setAttribute('aria-expanded', String(!isOpen));
+    });
+  });
+
+  function toggleAllFaqs(openState) {
+    document.querySelectorAll('.faq-item').forEach(item => {
+      if (openState) {
+        item.classList.add('open');
+        item.querySelector('.faq-question').setAttribute('aria-expanded', 'true');
+      } else {
+        item.classList.remove('open');
+        item.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
+  // Content Protection (Disable copy, cut, paste, context menu, DevTools shortcuts)
+  document.addEventListener('contextmenu', e => e.preventDefault());
+  document.addEventListener('copy', e => e.preventDefault());
+  document.addEventListener('cut', e => e.preventDefault());
+  document.addEventListener('paste', e => e.preventDefault());
+  document.addEventListener('keydown', e => {
+    if (
+      (e.ctrlKey || e.metaKey) &&
+      ['c', 'x', 'u', 's', 'a'].includes(e.key.toLowerCase())
+    ) {
+      e.preventDefault();
+    }
+    if (e.key === 'F12' || ((e.ctrlKey || e.metaKey) && e.shiftKey && ['i', 'j', 'c'].includes(e.key.toLowerCase()))) {
+      e.preventDefault();
+    }
+  });
+</script>
+</body>
+</html>
