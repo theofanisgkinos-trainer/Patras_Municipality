@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Οδηγός Χρήσης Εφαρμογής: ISO 9001:2015 Project Tracker</title>
+  <style>
+    :root {
+      --primary: #0f2942;
+      --primary-light: #1e4b7a;
+      --accent: #0284c7;
+      --accent-soft: #e0f2fe;
+      --success: #059669;
+      --success-soft: #d1fae5;
+      --warning: #d97706;
+      --warning-soft: #fef3c7;
+      --danger: #dc2626;
+      --danger-soft: #fee2e2;
+      --bg: #f1f5f9;
+      --card: #ffffff;
+      --text: #1e293b;
+      --text-muted: #475569;
+      --border: #cbd5e1;
+      --shadow: 0 4px 20px rgba(15, 41, 66, 0.07);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+    header.app-header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      color: #ffffff;
+      padding: 28px 24px 32px;
+      border-bottom: 4px solid var(--accent);
+    }
+    .header-inner { max-width: 1140px; margin: 0 auto; }
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-bottom: 22px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+    }
+    .logo-box {
+      background: #ffffff;
+      padding: 10px 18px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      display: flex;
+      align-items: center;
+    }
+    .logo-box img { height: 44px; width: auto; display: block; }
+        .iso-badge {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      border-left: 4px solid #38bdf8;
+      padding: 12px 20px;
+      border-radius: 8px;
+      text-align: center;
+    }
+    .iso-badge .dept-name { font-size: 0.94rem; font-weight: 700; color: #ffffff; }
+    .iso-badge .iso-sub { font-size: 0.82rem; color: #bae6fd; margin-top: 4px; font-weight: 500; }
+    .header-title-area h1 {
+      font-family: 'Calibri', 'Trebuchet MS', 'Segoe UI', sans-serif;
+      font-size: 1.9rem;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+      line-height: 1.3;
+      margin-bottom: 10px;
+      color: #ffffff;
+    }
+
+    .header-title-area p { font-size: 1.02rem; color: #e2e8f0; max-width: 880px; }
+    .sticky-nav-wrapper {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.96);
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 4px 14px rgba(15, 41, 66, 0.08);
+    }
+    .nav-inner {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 10px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .tabs-list { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tab-btn {
+      background: #f8fafc;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      padding: 9px 15px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .tab-btn:hover { background: var(--accent-soft); color: var(--primary); border-color: var(--accent); }
+    .tab-btn.active { background: var(--primary); color: #ffffff; border-color: var(--primary); }
+    .print-btn {
+      background: var(--accent);
+      color: #ffffff;
+      border: none;
+      padding: 9px 16px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .print-btn:hover { background: #0369a1; }
+    main.container { max-width: 1140px; margin: 28px auto 40px; padding: 0 24px; }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+    .section-card {
+      background: var(--card);
+      border-radius: 14px;
+      padding: 28px 32px;
+      box-shadow: var(--shadow);
+      border: 1px solid #e2e8f0;
+      margin-bottom: 24px;
+    }
+    .section-header { border-bottom: 2px solid var(--accent-soft); padding-bottom: 14px; margin-bottom: 22px; }
+    .section-header h2 { font-size: 1.45rem; color: var(--primary); font-weight: 800; }
+    .section-header .subtitle { color: var(--text-muted); font-size: 0.96rem; margin-top: 4px; }
+    p { margin-bottom: 12px; }
+    .table-responsive { overflow-x: auto; margin: 16px 0; border-radius: 10px; border: 1px solid var(--border); }
+    table.team-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.94rem; }
+    table.team-table th { background: var(--primary); color: #ffffff; padding: 12px 16px; font-weight: 600; }
+    table.team-table td { padding: 12px 16px; border-bottom: 1px solid #e2e8f0; vertical-align: top; }
+    table.team-table th:first-child, table.team-table td:first-child { white-space: nowrap; min-width: 175px; }
+    table.team-table tr:nth-child(even) { background: #f8fafc; }
+    table.team-table tr:hover { background: var(--accent-soft); }
+    .email-tag { background: #e2e8f0; color: var(--primary); padding: 3px 8px; border-radius: 6px; font-family: Consolas, monospace; font-size: 0.86rem; font-weight: 600; }
+    .sheet-grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 16px; }
+    .sheet-item { border: 1px solid var(--border); border-left: 5px solid var(--accent); border-radius: 10px; padding: 18px 20px; background: #fcfdfe; }
+    .sheet-item.readonly { border-left-color: #64748b; }
+    .sheet-item.editable { border-left-color: var(--success); }
+    .sheet-item.comment { border-left-color: var(--warning); }
+    .sheet-title-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
+    .sheet-name { font-size: 1.08rem; font-weight: 700; color: var(--primary); }
+    .badge-perm { font-size: 0.78rem; font-weight: 700; padding: 3px 10px; border-radius: 20px; }
+    .badge-readonly { background: #e2e8f0; color: #334155; }
+    .badge-editable { background: var(--success-soft); color: #065f46; }
+    .badge-comment { background: var(--warning-soft); color: #92400e; }
+    .rights-box { margin-top: 10px; padding: 10px 14px; background: #f1f5f9; border-radius: 8px; font-size: 0.92rem; }
+    .step-card { border: 1px solid var(--border); border-radius: 12px; padding: 20px 24px; margin-bottom: 20px; background: #ffffff; }
+    .step-badge { display: inline-block; background: var(--primary); color: #ffffff; font-size: 0.8rem; font-weight: 700; padding: 4px 12px; border-radius: 6px; margin-bottom: 8px; }
+    .step-card h4 { font-size: 1.12rem; color: var(--primary); margin-bottom: 12px; }
+    ul.styled-list, ol.styled-list { margin-left: 22px; margin-bottom: 12px; }
+    ul.styled-list li, ol.styled-list li { margin-bottom: 7px; }
+    .callout { padding: 14px 18px; border-radius: 8px; margin: 14px 0; font-size: 0.93rem; border-left: 4px solid var(--accent); background: var(--accent-soft); color: #0c4a6e; }
+    .callout.warning { border-left-color: var(--warning); background: var(--warning-soft); color: #78350f; }
+    .callout.danger { border-left-color: var(--danger); background: var(--danger-soft); color: #7f1d1d; }
+    .callout.success { border-left-color: var(--success); background: var(--success-soft); color: #064e3b; }
+    .golden-rules { background: linear-gradient(to right, #fffbeb, #fef3c7); border: 1px solid #fcd34d; border-left: 5px solid #d97706; border-radius: 12px; padding: 20px 24px; margin-top: 24px; }
+    .golden-rules h3 { color: #92400e; margin-top: 0; margin-bottom: 12px; }
+    .faq-controls { display: flex; gap: 10px; margin-bottom: 18px; flex-wrap: wrap; }
+    .faq-ctrl-btn { background: #f8fafc; border: 1px solid var(--border); color: var(--primary); padding: 7px 14px; border-radius: 7px; font-size: 0.88rem; font-weight: 600; cursor: pointer; }
+    .faq-ctrl-btn:hover { background: var(--accent-soft); border-color: var(--accent); }
+    .faq-item { border: 1px solid var(--border); border-radius: 10px; margin-bottom: 12px; overflow: hidden; background: #ffffff; }
+    .faq-question { width: 100%; text-align: left; background: #f8fafc; border: none; padding: 16px 20px; font-size: 1rem; font-weight: 700; color: var(--primary); cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+    .faq-question:hover { background: var(--accent-soft); }
+    .faq-icon { font-size: 1.25rem; font-weight: 700; color: var(--accent); flex-shrink: 0; }
+    .faq-item.open .faq-question { background: var(--primary); color: #ffffff; }
+    .faq-item.open .faq-icon { color: #38bdf8; }
+    .faq-answer { display: none; padding: 18px 22px; border-top: 1px solid var(--border); background: #ffffff; }
+    .faq-item.open .faq-answer { display: block; }
+    .cause-tag { display: inline-block; background: var(--danger-soft); color: #991b1b; font-weight: 700; padding: 2px 8px; border-radius: 5px; font-size: 0.86rem; margin-right: 6px; }
+    .solution-tag { display: inline-block; background: var(--success-soft); color: #065f46; font-weight: 700; padding: 2px 8px; border-radius: 5px; font-size: 0.86rem; margin-right: 6px; }
+    footer.app-footer { max-width: 1140px; margin: 0 auto 30px; padding: 18px 24px; border-top: 2px solid var(--border); color: var(--text-muted); font-size: 0.88rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+    @media print {
+      @page { margin: 12mm 14mm; }
+      body { background: #ffffff !important; color: #000000 !important; margin: 0 !important; padding: 0 !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+      .sticky-nav-wrapper, .faq-controls, .print-btn { display: none !important; }
+      header.app-header { padding: 14px 18px !important; margin: 0 0 14px 0 !important; border-radius: 8px; }
+      .header-top { margin-bottom: 10px !important; padding-bottom: 10px !important; }
+      .header-title-area h1 {
+      font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      letter-spacing: -0.2px;
+      line-height: 1.3;
+      margin-bottom: 10px;
+      color: #ffffff;
+    }
+      main.container { margin: 0 !important; padding: 0 !important; max-width: 100% !important; }
+      .tab-panel { display: none !important; }
+      .tab-panel.active { display: block !important; }
+      .section-card { box-shadow: none !important; border: 1px solid #cbd5e1 !important; padding: 16px 20px !important; margin-bottom: 14px !important; }
+      .faq-answer { display: block !important; }
+      .step-card, .sheet-item, .faq-item, .callout { break-inside: avoid; }
+      footer.app-footer { display: flex !important; margin: 16px 0 0 0 !important; padding: 10px 0 0 0 !important; border-top: 1px solid #94a3b8 !important; font-size: 0.82rem !important; color: #334155 !important; }
+    }
+    @media (max-width: 768px) {
+      .header-top { flex-direction: column; align-items: flex-start; }
+      .iso-badge { text-align: center; width: 100%; }
+      .section-card { padding: 20px 18px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="app-header" id="top-anchor">
+    <div class="header-inner">
+      <div class="header-top">
+    <div class="logo-box">
+                  <img src="data:image/png;base64,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" alt="Logo Οργανισμού">
+        </div>
+
+        <div class="iso-badge">
+          <div class="dept-name">Δήμος Πατρέων — Διεύθυνση Προγραμματισμού, Οργάνωσης και Πληροφορικής</div>
+          <div class="iso-sub">Εφαρμογή ISO9001_Tracker • Εγχειρίδιο Χρήσης & Τεκμηρίωσης</div>
+        </div>
+      </div>
+      <div class="header-title-area">
+        <h1>Οδηγός Χρήσης Εφαρμογής: ISO 9001:2015 Project Tracker</h1>
+        <p>Εργαλείο παρακολούθησης των 3 εναπομενουσών Φάσεων του έργου Σχεδιασμού, Εγκατάστασης και Πιστοποίησης κατά ISO 9001:2015 της Διεύθυνσης Προγραμματισμού, Οργάνωσης και Πληροφορικής του Δήμου Πατρέων.</p>
+      </div>
+    </div>
+  </header>
+
+  <div class="sticky-nav-wrapper">
+    <div class="nav-inner">
+      <div class="tabs-list" role="tablist">
+        <button class="tab-btn active" data-tab="sec-a" role="tab">👥 Α. Ομάδα Έργου</button>
+        <button class="tab-btn" data-tab="sec-b" role="tab">🗂 Β. Αρχιτεκτονική & Δομή</button>
+        <button class="tab-btn" data-tab="sec-c" role="tab">⚙️ Γ. Λειτουργία Εφαρμογής</button>
+        <button class="tab-btn" data-tab="sec-d" role="tab">🛠 Δ. Troubleshooting</button>
+      </div>
+      <button class="print-btn" onclick="window.print()" title="Εκτύπωση μόνο της ενεργής ενότητας">
+        🖨 Εκτύπωση Ενότητας
+      </button>
+    </div>
+  </div>
+  <main class="container">
+
+    <section id="sec-a" class="tab-panel active" role="tabpanel">
+      <div class="section-card">
+        <div class="section-header">
+          <h2>Α. Μέλη της Ομάδας Χρήσης της Εφαρμογής</h2>
+          <div class="subtitle">Εξουσιοδοτημένοι χρήστες, ρόλοι και στοιχεία επικοινωνίας για την παρακολούθηση του έργου ISO 9001:2015.</div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="team-table">
+            <thead>
+              <tr>
+                <th>Ονοματεπώνυμο</th>
+                <th>Ιδιότητα Χρήστη</th>
+                <th>Email</th>
+                <th>Τηλέφωνο</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Α. Κλαουδάτος</strong></td>
+                <td>Υπεύθυνος έργου</td>
+                <td><span class="email-tag">klaoudatos@qlc.gr</span></td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>Θ. Γκίνος</strong></td>
+                <td>Μέλος ομάδας έργου &amp; Διαχειριστής της εφαρμογής</td>
+                <td><span class="email-tag">gkinos@qlc.gr</span></td>
+                <td><strong>6944945981</strong></td>
+              </tr>
+              <tr>
+                <td><strong>Ε. Πολιτοπούλου</strong></td>
+                <td>Αναπληρώτρια Δ/ντρια Διεύθυνσης και Προϊσταμένη Τμήματος Πληροφορικής και Επικοινωνιών</td>
+                <td><span class="email-tag">politop@gmail.com</span></td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>Α. Γκοντζής</strong></td>
+                <td>Προϊστάμενος του Τμήματος Διαλειτουργικότητας και Προτύπων &amp; Υπεύθυνος Ποιότητας της Διεύθυνσης</td>
+                <td><span class="email-tag">gontzis@gmail.com</span></td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>Β. Παπαϊωάννου</strong></td>
+                <td>Προϊστάμενος του Τμήματος Σχεδιασμού και Μελετών, Ψηφιακών Συστημάτων</td>
+                <td><span class="email-tag">vpapa@patras.gr</span></td>
+                <td>—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout danger" style="background-color: #ffe4e6; border: 1px solid #fda4af; border-left: 5px solid #e11d48; color: #881337;">
+          ⚠️ <strong>Ενημέρωση Στοιχείων:</strong> Σε περίπτωση αλλαγής email παρακαλούνται τα μέλη της ομάδας να ενημερώσουν άμεσα τον διαχειριστή της εφαρμογής.
+        </div>
+      </div>
+    </section>
+    <section id="sec-b" class="tab-panel" role="tabpanel">
+      <div class="section-card">
+        <div class="section-header">
+          <h2>Β. Αρχιτεκτονική &amp; Δομή της Εφαρμογής</h2>
+          <div class="subtitle">Επισκόπηση των πέντε (5) διασυνδεδεμένων φύλλων εργασίας και δικαιώματα πρόσβασης χρηστών.</div>
+        </div>
+
+        <p>Η εφαρμογή διαρθρώνεται σε <strong>πέντε (5) διασυνδεδεμένα φύλλα εργασίας</strong> (καρτέλες στο κάτω μέρος της οθόνης). Για τη διασφάλιση της ακεραιότητας των δεδομένων και των αυτόματων υπολογισμών, τα πεδία συστήματος είναι προστατευμένα, επιτρέποντας επεξεργασία αποκλειστικά στα πεδία παρακολούθησης προόδου:</p>
+
+        <div class="sheet-grid">
+          <div class="sheet-item readonly">
+            <div class="sheet-title-row">
+              <span class="sheet-name">📊 1. Dashboard (Συγκεντρωτικός Πίνακας Δεικτών)</span>
+              <span class="badge-perm badge-readonly">Μόνο Ανάγνωση</span>
+            </div>
+            <p>Αποτελεί την κεντρική οθόνη επισκόπησης του έργου. Απεικονίζει σε πραγματικό χρόνο τα ποσοστά υλοποίησης ανά Φάση (Β, Γ, Δ), τον αριθμό Δράσεων, Ενεργειών και Παραδοτέων, τα στοιχεία του τελευταίου σχολιασμού ανά Φάση καθώς και τις ειδοποιήσεις προθεσμιών (<strong>ALERTS</strong>).</p>
+            <div class="rights-box">
+              <strong>Λειτουργίες:</strong> Φιλοξενεί τα βασικά πλήκτρα αυτοματισμών (ολοκλήρωση επεξεργασίας &amp; αποστολή ειδοποιήσεων).
+            </div>
+          </div>
+
+          <div class="sheet-item comment">
+            <div class="sheet-title-row">
+              <span class="sheet-name">🎯 2. Δράσεις (Πλάνο Δράσεων ανά Φάση)</span>
+              <span class="badge-perm badge-comment">Ανάγνωση &amp; Σχολιασμός</span>
+            </div>
+            <p>Παρουσιάζει τη διάρθρωση των Δράσεων ανά Φάση και υπολογίζει αυτόματα το συνολικό ποσοστό υλοποίησης καθεμιάς, βάσει της προόδου των επιμέρους Ενεργειών της.</p>
+            <div class="rights-box">
+              <strong>Δικαιώματα χρήστη:</strong> Καταχώριση σχολίων μέσω διπλού κλικ (<em>double click</em>) επί του Κωδικού Δράσης (π.χ. <code>Β01</code>).
+            </div>
+          </div>
+
+          <div class="sheet-item editable">
+            <div class="sheet-title-row">
+              <span class="sheet-name">⚡ 3. Ενέργειες (Αναλυτική Παρακολούθηση Ενεργειών)</span>
+              <span class="badge-perm badge-editable">Επεξεργάσιμο</span>
+            </div>
+            <p>Περιλαμβάνει το αναλυτικό χρονοδιάγραμμα και τους εμπλεκόμενους φορείς (<strong>QLC, ΔιΠΟΠ, ΦΠ</strong>) για κάθε Ενέργεια.</p>
+            <div class="rights-box">
+              <strong>Δικαιώματα χρήστη:</strong> Ενημέρωση των συμμετεχόντων φορέων, των Ημερομηνιών Έναρξης/Λήξης και της Κατάστασης (<em>Εκκίνηση, Σε εξέλιξη, Ολοκλήρωση</em>), καθώς και καταχώριση σχολίων μέσω διπλού κλικ επί του Κωδικού Ενέργειας (π.χ. <code>ΕΒ01.01</code>).
+            </div>
+          </div>
+
+          <div class="sheet-item editable">
+            <div class="sheet-title-row">
+              <span class="sheet-name">📁 4. Παραδοτέα (Μητρώο Παραδοτέων Έργου)</span>
+              <span class="badge-perm badge-editable">Επεξεργάσιμο</span>
+            </div>
+            <p>Καταγράφει τα συμβατικά παραδοτέα ανά Φάση, το στάδιο ωρίμανσής τους και τους συνδέσμους πρόσβασης στα αντίστοιχα αρχεία.</p>
+            <div class="rights-box">
+              <strong>Δικαιώματα χρήστη:</strong> Ενημέρωση της Ημερομηνίας Λήξης, της Κατάστασης (6 στάδια), επικόλληση του Συνδέσμου Αρχείου (Link) από το Google Drive, καθώς και καταχώριση σχολίων μέσω διπλού κλικ επί του Κωδικού Παραδοτέου (π.χ. <code>ΠΒ.01</code>).
+            </div>
+          </div>
+
+          <div class="sheet-item readonly">
+            <div class="sheet-title-row">
+              <span class="sheet-name">📜 5. Ιστορικό_Σχολίων (Μητρώο Ιχνηλασιμότητας / Audit Trail)</span>
+              <span class="badge-perm badge-readonly">Μόνο Ανάγνωση</span>
+            </div>
+            <p>Τηρεί αυτόματο, αμετάβλητο χρονολογικό αρχείο όλων των καταχωρισμένων σχολίων (ημερομηνία, ώρα, συντάκτης και κωδικός αναφοράς), διασφαλίζοντας την πλήρη ιχνηλασιμότητα των ενεργειών σύμφωνα με τις απαιτήσεις του προτύπου <strong>ISO 9001:2015</strong>.</p>
+          </div>
+        </div>
+
+        <div class="callout warning" style="margin-top: 20px;">
+          ⚠️ <strong>Υποχρέωση Τεκμηρίωσης Μεταβολών:</strong> Κάθε τροποποίηση στοιχείων (αλλαγή Κατάστασης, αναπροσαρμογή Ημερομηνιών ή ανάρτηση νέας έκδοσης Παραδοτέου) πρέπει <strong>υποχρεωτικά</strong> να συνοδεύεται από σχετικό σχόλιο στον αντίστοιχο Κωδικό, ώστε να ενημερώνεται το Μητρώο Ιχνηλασιμότητας (<code>Ιστορικό_Σχολίων</code>) και να κοινοποιείται η μεταβολή στα υπόλοιπα μέλη της ομάδας έργου μέσω του Dashboard.
+        </div>
+      </div>
+    </section>
+    <section id="sec-c" class="tab-panel" role="tabpanel">
+      <div class="section-card">
+        <div class="section-header">
+          <h2>Γ. Λειτουργία της Εφαρμογής</h2>
+          <div class="subtitle">Οδηγός 4 απλών βημάτων για ασφαλή εργασία, αποφυγή διπλότυπων αρχείων και αυτόματες ειδοποιήσεις.</div>
+        </div>
+
+        <p>Για να λειτουργεί η εφαρμογή με απόλυτη ασφάλεια και να μην χάνονται δεδομένα ή δημιουργούνται διπλότυπα αρχεία, ακολουθούμε πάντα τα παρακάτω <strong>4 απλά βήματα</strong>:</p>
+
+        <div class="step-card">
+          <span class="step-badge">ΒΗΜΑ 1</span>
+          <h4>📥 Κατέβασμα του αρχείου (Download)</h4>
+          <ol class="styled-list">
+            <li>Μπείτε στον κοινόχρηστο φάκελο του Google Drive.</li>
+            <li>Εντοπίστε το αρχείο <strong><code>ISO9001_Tracker.xlsm</code></strong>.</li>
+            <li>Κάντε δεξί κλικ πάνω του και επιλέξτε <strong>Λήψη (Download)</strong>.</li>
+            <strong>ΠΡΟΣΟΧΗ:</strong> Αποθηκεύστε το αρχείο στην <strong>Επιφάνεια Εργασίας</strong> του υπολογιστή σας!
+            <li>Ανοίξτε το αρχείο από την Επιφάνεια Εργασίας του υπολογιστή σας.</li>
+          </ol>
+          <div class="callout warning">
+            <strong>Σημείωση 1 (Μόνο την 1η φορά):</strong> Αν εμφανιστεί κίτρινη ή κόκκινη μπάρα ασφαλείας στην κορυφή του Excel, πατήστε <strong>«Ενεργοποίηση περιεχομένου» (Enable Content)</strong> ώστε να λειτουργούν οι μακροεντολές της εφαρμογής.
+          </div>
+          <div class="callout">
+            <strong>Σημείωση 2 (Για τις επόμενες φορές):</strong> Αν έχετε ξανακατεβάσει το αρχείο στο παρελθόν και έχετε ξεχάσει να το διαγράψετε από την Επιφάνεια Εργασίας μετά την ολοκλήρωση του Βήματος 4, ενδέχεται να εμφανιστεί ως <code>ISO9001_Tracker (1).xlsm</code>. Ανοίξτε το κανονικά — η εφαρμογή θα διορθώσει αυτόματα το όνομα στο Βήμα 3.
+          </div>
+        </div>
+
+        <div class="step-card">
+          <span class="step-badge">ΒΗΜΑ 2</span>
+          <h4>✏️ Επεξεργασία &amp; Ενημέρωση Δεδομένων</h4>
+          <p>Εργαστείτε κανονικά στον υπολογιστή σας (δεν απαιτείται σύνδεση στο internet κατά τη διάρκεια της επεξεργασίας).</p>
+          <p><strong>1. Τροποποίηση στοιχείων &amp; Καταχώριση Σχολίου (π.χ. αλλαγή Κατάστασης, Ημερομηνιών, υποβολή Παραδοτέου):</strong></p>
+          <ol class="styled-list">
+            <li>Πηγαίνετε στο αντίστοιχο φύλλο (<em>Δράσεις, Ενέργειες</em> ή <em>Παραδοτέα</em>) και κάντε την αλλαγή που επιθυμείτε.</li>
+            <li>Κάντε <strong>διπλό κλικ (Double Click)</strong> πάνω στον Κωδικό του στοιχείου που τροποποιήσατε (π.χ. πάνω στο <code>Β01</code>, στο <code>ΕΒ01.02</code> ή στο <code>ΠΒ.01</code>).</li>
+            <li>Θα ανοίξει ένα παράθυρο σχολιασμού, όπου εμφανίζονται τα στοιχεία του αντικειμένου καθώς και το ιστορικό όλων των προηγούμενων σχολίων.</li>
+            <li>Επιλέξτε το όνομά σας από τη λίστα <strong>«Χρήστης»</strong> και γράψτε το σχόλιό σας στο πλαίσιο κειμένου (σύντομη περιγραφή του είδους και του σκοπού της αλλαγής).</li>
+            <li>Πατήστε <strong>«Καταχώρηση»</strong> και επιβεβαιώστε στο παράθυρο που θα εμφανιστεί (ή πατήστε <em>«Διαγραφή / Ακύρωση»</em> αν αλλάξετε γνώμη).</li>
+          </ol>
+          <div class="callout success">
+            <strong>Τι συμβαίνει μόλις καταχωρηθεί το σχόλιο:</strong>
+            <ul class="styled-list" style="margin-top:6px; margin-bottom:0;">
+              <li>Το σχόλιο αποθηκεύεται μόνιμα στο φύλλο <code>Ιστορικό_Σχολίων</code> με το όνομά σας, την ημερομηνία και την ώρα.</li>
+              <li>Ο κωδικός του στοιχείου γίνεται αυτόματα <strong>κόκκινος</strong> στο σχετικό φύλλο, ώστε όλη η ομάδα να βλέπει με μια ματιά ότι υπάρχει σχόλιο.</li>
+              <li>Η αρχική οθόνη (<code>Dashboard</code>) ενημερώνεται αυτόματα με τα στοιχεία του τελευταίου σχολιασμού της αντίστοιχης Φάσης.</li>
+            </ul>
+          </div>
+          <p style="margin-top:16px;"><strong>2. Σύνδεση Παραδοτέου με αρχείο (Word ή PDF) ή ανάρτηση νέας έκδοσης:</strong></p>
+          <ol class="styled-list">
+            <li>Ανεβάστε πρώτα το αρχείο Word/PDF στον <strong>κοινόχρηστο φάκελο του Google Drive</strong> (π.χ. στον υποφάκελο <em>«Παραδοτέα Φάσης Β»</em>).</li>
+            <li>Κάντε δεξί κλικ πάνω στο αρχείο (στο Google Drive) → <strong>Κοινοποίηση (Share)</strong> → <strong>Αντιγραφή συνδέσμου (Copy link)</strong>.</li>
+            <li>Μεταβείτε στο φύλλο «Παραδοτέα» του Excel, βρείτε τη γραμμή του Παραδοτέου και κάντε <strong>Επικόλληση (Ctrl + V)</strong> στη στήλη <strong>ΣΥΝΔΕΣΜΟΣ ΑΡΧΕΙΟΥ (LINK)</strong>. <em>(Εάν υπήρχε παλαιότερος σύνδεσμος, αντικαταστήστε τον με τον νέο.)</em></li>
+            <li>Δίπλα θα εμφανιστεί αυτόματα η ένδειξη <strong>📄 Άνοιγμα Αρχείου</strong>, με την οποία όλοι οι χρήστες θα μπορούν πλέον να ανοίγουν το αρχείο με ένα κλικ.</li>
+          </ol>
+          <div class="callout danger">
+            <strong>Σημείωση 1:</strong> Μην βάζετε ποτέ συνδέσμους από αρχεία που βρίσκονται αποθηκευμένα τοπικά στον υπολογιστή σας, γιατί δεν θα ανοίγουν στους υπόλοιπους χρήστες.<br>
+            <strong>Σημείωση 2:</strong> Μην ξεχάσετε να καταχωρήσετε το σχόλιό σας!
+          </div>
+        </div>
+        <div class="step-card">
+          <span class="step-badge">ΒΗΜΑ 3</span>
+          <h4>💾 Αποθήκευση &amp; Ετοιμασία Ειδοποίησης (Μέσα από το Excel)</h4>
+          <p>Όταν ολοκληρώσετε τις αλλαγές σας:</p>
+          <ol class="styled-list">
+            <li>Πατήστε το κουμπί <strong>«Ετοιμασία Αρχείου για Ανέβασμα»</strong> στην αρχική οθόνη της εφαρμογής.</li>
+            <li>Στο παραθυράκι που θα εμφανιστεί, επιλέγετε το όνομά σας και πατάτε <strong>OK</strong>.</li>
+            <li>Η εφαρμογή κάνει μόνη της τα εξής:
+              <ul class="styled-list" style="margin-top:6px;">
+                <li>Αποθηκεύει ένα έτοιμο αντίγραφο του αρχείου στην <strong>Επιφάνεια Εργασίας (Desktop)</strong> σας με το σωστό όνομα (<code>ISO9001_Tracker.xlsm</code>).</li>
+                <li>Ανοίγει αυτόματα το προεπιλεγμένο πρόγραμμα ηλεκτρονικού ταχυδρομείου (email) του υπολογιστή σας σε ένα έτοιμο μήνυμα, όπου έχουν ήδη συμπληρωθεί οι παραλήπτες, το Θέμα και το Κείμενο ειδοποίησης.</li>
+              </ul>
+            </li>
+          </ol>
+        </div>
+
+        <div class="step-card">
+          <span class="step-badge">ΒΗΜΑ 4</span>
+          <h4>☁️ Ανέβασμα &amp; Αντικατάσταση στο Google Drive (Upload) &amp; Αποστολή Email</h4>
+          <ol class="styled-list">
+            <li>Επιστρέψτε στον κοινόχρηστο φάκελο του Google Drive.</li>
+            <li>Σύρετε (<em>drag &amp; drop</em>) το αρχείο <code>ISO9001_Tracker.xlsm</code> από την Επιφάνεια Εργασίας σας μέσα στον φάκελο του Google Drive.</li>
+            <li>Στο παράθυρο που θα εμφανιστεί, επιλέξτε <strong>«Αντικατάσταση υπάρχοντος αρχείου» (Replace existing file)</strong> — <strong>ΠΟΤΕ</strong> <em>«Διατήρηση ως ξεχωριστού αρχείου»</em>.</li>
+            <li>Μεταβείτε στο παράθυρο του email που άνοιξε αυτόματα και πατήστε <strong>«Αποστολή» (Send)</strong>.</li>
+          </ol>
+          <div class="callout warning">
+            <strong>ΣΗΜΑΝΤΙΚΟ:</strong> Αφού ολοκληρωθεί το ανέβασμα, <strong>διαγράψτε το αντίγραφο από την Επιφάνεια Εργασίας σας</strong>, ώστε την επόμενη φορά να κατεβάσετε ξανά την πιο πρόσφατη έκδοση από το Google Drive.
+          </div>
+        </div>
+
+        <div class="step-card" style="border-left: 5px solid var(--accent);">
+          <h4>📢 Ειδοποιήσεις Προθεσμιών (Πλήκτρο «Αποστολή Alerts Λήξης» στο Dashboard)</h4>
+          <p>Στην αρχική οθόνη (<code>Dashboard</code>), η εφαρμογή ελέγχει αυτόματα τις ημερομηνίες λήξης όλων των ανοιχτών Ενεργειών και Παραδοτέων. Όσα στοιχεία έχουν καθυστερήσει ή λήγουν εντός των <strong>10 επόμενων ημερών</strong> (βάσει του ορίου ειδοποίησης που έχει θέσει ο διαχειριστής της εφαρμογής) εμφανίζονται στο πλαίσιο <strong>ALERTS</strong>.</p>
+          <p><strong>Πώς στέλνεται ομαδική υπενθύμιση μέσω email:</strong></p>
+          <ol class="styled-list">
+            <li>Πατήστε το πλήκτρο <strong>«Αποστολή Alerts Λήξης»</strong> στο Dashboard.</li>
+            <li>Η εφαρμογή σαρώνει αυτόματα όλο το πλάνο:
+              <ul class="styled-list" style="margin-top:6px;">
+                <li>Εάν δεν υπάρχουν εκκρεμότητες που λήγουν σύντομα, εμφανίζει σχετικό ενημερωτικό μήνυμα.</li>
+                <li>Εάν υπάρχουν εκκρεμότητες, θα ανοίξει ένα παράθυρο για την ταυτοποίηση του χρήστη και στην συνέχεια θα ανοίξει αυτόματα το προεπιλεγμένο πρόγραμμα ηλεκτρονικού ταχυδρομείου σας, όπου έχουν ήδη συμπληρωθεί οι (<strong>5 παραλήπτες</strong>) της ομάδας και το Θέμα. Ένα <strong>έτοιμο μήνυμα με αναλυτική λίστα των Ενεργειών και Παραδοτέων που λήγουν ή έχουν καθυστερήσει έχει αποθηκευτεί στο clipboard.</strong></li>
+              </ul>
+            </li>
+            <li>Κάντε επικόλληση του αποθηκευμένου μηνύματος στο σώμα του email και πατήστε <strong>«Αποστολή» (Send)</strong>.</li>
+          </ol>
+          <p style="margin-bottom:0; color:var(--text-muted); font-size:0.92rem;"><em>Σημείωση χρήσης: Το πλήκτρο αυτό χρησιμοποιείται περιοδικά (π.χ. στην αρχή της εβδομάδας ή κατά την επισκόπηση προόδου) για την έγκαιρη υπενθύμιση των προθεσμιών σε όλη την ομάδα.</em></p>
+        </div>
+
+        <div class="golden-rules">
+          <h3>🛡️ ΧΡΥΣΟΙ ΚΑΝΟΝΕΣ ΑΣΦΑΛΕΙΑΣ</h3>
+          <ul class="styled-list" style="margin-bottom:0;">
+            <li><strong>Πάντα μέσω του κουμπιού:</strong> Χρησιμοποιείτε πάντα το κουμπί <em>«Ετοιμασία Αρχείου για Ανέβασμα»</em> πριν ανεβάσετε το αρχείο, ώστε να διατηρείται το ίδιο όνομα αρχείου και να λειτουργεί το αυτόματο ιστορικό εκδόσεων (Version History) του Google Drive.</li>
+            <li><strong>Ανάκτηση παλαιότερης έκδοσης (σε περίπτωση λάθους):</strong> Αν γίνει οποιοδήποτε λάθος, κάνουμε δεξί κλικ στο αρχείο στο Google Drive → <em>Πληροφορίες αρχείου → Διαχείριση εκδόσεων</em> και επαναφέρουμε την αμέσως προηγούμενη έκδοση.</li>
+            <li><strong>Υποστήριξη &amp; Τεχνικά Θέματα:</strong> Για οποιοδήποτε πρόβλημα, σφάλμα ή απορία αντιμετωπίσετε κατά τη χρήση της εφαρμογής, ενημερώστε άμεσα τον διαχειριστή της εφαρμογής.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <section id="sec-d" class="tab-panel" role="tabpanel">
+      <div class="section-card">
+        <div class="section-header">
+          <h2>Δ. Αντιμετώπιση Συχνών Προβλημάτων (Troubleshooting)</h2>
+          <div class="subtitle">Κάντε κλικ σε κάθε ερώτηση/περίπτωση για να δείτε την αιτία και την άμεση λύση.</div>
+        </div>
+
+        <div class="faq-controls">
+          <button class="faq-ctrl-btn" onclick="toggleAllFaqs(true)">➕ Άνοιγμα Όλων</button>
+          <button class="faq-ctrl-btn" onclick="toggleAllFaqs(false)">➖ Κλείσιμο Όλων</button>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>1. «Πατάω τα κουμπιά στο Dashboard ή κάνω διπλό κλικ στους κωδικούς και δεν γίνεται τίποτα!»</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p><span class="cause-tag">Αιτία</span> Το Excel έχει μπλοκάρει τις μακροεντολές (VBA) για λόγους ασφαλείας.</p>
+            <p><span class="solution-tag">Λύση</span> Κοιτάξτε στην κορυφή του παραθύρου του Excel (κάτω από την κορδέλα εργαλείων) και πατήστε το κουμπί <strong>«Ενεργοποίηση περιεχομένου» (Enable Content)</strong>. Αν δεν εμφανίζεται το κουμπί (επειδή το αρχείο κατέβηκε από το internet), κλείστε το Excel, κάντε δεξί κλικ στο αρχείο <code>ISO9001_Tracker.xlsm</code> στην Επιφάνεια Εργασίας → <strong>Ιδιότητες (Properties)</strong> → τσεκάρετε κάτω δεξιά το κουτάκι <strong>«Κατάργηση αποκλεισμού» (Unblock)</strong> → πατήστε OK και ξανανοίξτε το.</p>
+            <p style="margin-bottom:0;">Εάν το πρόβλημα επιμένει, μην προχωρήσετε σε αλλαγές και ενημερώστε τον διαχειριστή της εφαρμογής.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>2. «Προσπαθώ να γράψω σε ένα κελί και μου βγάζει μήνυμα ότι το φύλλο είναι προστατευμένο!»</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p><span class="cause-tag">Αιτία</span> Προσπαθείτε να επεξεργαστείτε κελί που περιέχει αυτόματο τύπο ή σταθερά στοιχεία του έργου.</p>
+            <p style="margin-bottom:0;"><span class="solution-tag">Λύση</span> Ενημερώνετε μόνο τα επιτρεπόμενα πεδία (<em>Συμμετέχοντες, Ημερομηνίες, Κατάσταση, Σύνδεσμος Αρχείου</em>) ή κάντε <strong>διπλό κλικ πάνω στον Κωδικό</strong> για να καταχωρήσετε σχόλιο.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>3. «Πάτησα “Ετοιμασία Αρχείου για Ανέβασμα”, αλλά δεν άνοιξε το παράθυρο του email!»</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p><span class="cause-tag">Αιτία</span> Δεν υπάρχει ρυθμισμένο προεπιλεγμένο πρόγραμμα αλληλογραφίας στον υπολογιστή σας (ή το αρχείο αποθηκεύτηκε κανονικά στην Επιφάνεια Εργασίας, αλλά μπλοκαρίστηκε το email).</p>
+            <p style="margin-bottom:0;"><span class="solution-tag">Λύση</span> Το αρχείο σας έχει ήδη αποθηκευτεί σωστά στην Επιφάνεια Εργασίας! Ανεβάστε το κανονικά στο Google Drive (<strong>Βήμα 4</strong>) και στείλτε ένα σύντομο χειροκίνητο email στα υπόλοιπα μέλη της ομάδας. Ενημερώστε τον διαχειριστή της εφαρμογής.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>4. «Όταν άνοιξα ένα σύνδεσμο Παραδοτέου (📄 Άνοιγμα Αρχείου), μου ζητάει άδεια πρόσβασης (Request Access)!»</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p><span class="cause-tag">Αιτία</span> Όποιος ανέβασε το Word/PDF στο Google Drive το ανέβασε σε προσωπικό του φάκελο αντί για τον κοινόχρηστο φάκελο της ομάδας.</p>
+            <p style="margin-bottom:0;"><span class="solution-tag">Λύση</span> Ενημερώστε τον χρήστη που ανέβασε το αρχείο να το μεταφέρει μέσα στον κοινόχρηστο φάκελο του έργου στο Google Drive.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>5. «Ανέβασα λάθος αρχείο ή έσβησα δεδομένα!»</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p style="margin-bottom:0;"><span class="solution-tag">Λύση</span> Μην ανησυχείτε! Στο Google Drive κάντε δεξί κλικ πάνω στο <code>ISO9001_Tracker.xlsm</code> → <strong>Πληροφορίες αρχείου → Διαχείριση εκδόσεων</strong> και κατεβάστε την αμέσως προηγούμενη έκδοση.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>6. «Αντιμετωπίζω κάποιο άλλο πρόβλημα ή σφάλμα στην οθόνη!»</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p style="margin-bottom:0;"><span class="solution-tag">Λύση</span> Μην αποθηκεύσετε και μην ανεβάσετε το αρχείο στο Google Drive αν εμφανιστεί μήνυμα σφάλματος. Κρατήστε ένα στιγμιότυπο οθόνης (<em>print screen</em>) αν είναι δυνατόν και ενημερώστε άμεσα τον διαχειριστή της εφαρμογής ώστε να το επιλύσει.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="app-footer">
+    <div><strong>Οδηγός Χρήσης Εφαρμογής:</strong> ISO 9001:2015 Project Tracker.01 — QLC &amp; Δήμος Πατρέων</div>
+    <div>Διεύθυνση Προγραμματισμού, Οργάνωσης και Πληροφορικής</div>
+  </footer>
+  <script>
+    // 1. Εναλλαγή Καρτελών & Ομαλή Κύλιση στην αρχή της ενότητας
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabPanels = document.querySelectorAll('.tab-panel');
+
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetId = btn.getAttribute('data-tab');
+        tabButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        tabPanels.forEach(panel => {
+          panel.classList.toggle('active', panel.id === targetId);
+        });
+
+        const targetEl = document.getElementById(targetId);
+        const navHeight = document.querySelector('.sticky-nav-wrapper').offsetHeight;
+        const yPosition = targetEl.getBoundingClientRect().top + window.pageYOffset - navHeight - 16;
+
+        window.scrollTo({
+          top: Math.max(0, yPosition),
+          behavior: 'smooth'
+        });
+      });
+    });
+
+    // 2. Λειτουργία Accordion (Ενότητα Δ - Troubleshooting)
+    function toggleFaq(buttonEl) {
+      const item = buttonEl.closest('.faq-item');
+      const icon = buttonEl.querySelector('.faq-icon');
+      const isOpen = item.classList.toggle('open');
+      icon.textContent = isOpen ? '−' : '+';
+    }
+
+    function toggleAllFaqs(openState) {
+      document.querySelectorAll('#sec-d .faq-item').forEach(item => {
+        const icon = item.querySelector('.faq-icon');
+        item.classList.toggle('open', openState);
+        icon.textContent = openState ? '−' : '+';
+      });
+    }
+
+    // 3. Κλείδωμα Δεξιού Κλικ & Copy/Paste/Cut/Select
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    ['copy', 'cut', 'paste', 'dragstart', 'selectstart'].forEach(evt => {
+      document.addEventListener(evt, e => e.preventDefault());
+    });
+    document.addEventListener('keydown', e => {
+      if ((e.ctrlKey || e.metaKey) && ['c', 'x', 'v', 'a', 'u', 's'].includes(e.key.toLowerCase())) {
+        e.preventDefault();
+      }
+      if (e.key === 'F12') e.preventDefault();
+    });
+     </script>
+</body>
+</html>
